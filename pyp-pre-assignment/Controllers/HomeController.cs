@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using pyp_pre_assignment.Data;
 using pyp_pre_assignment.Entities;
+using pyp_pre_assignment.Extentions;
 
 namespace pyp_pre_assignment.Controllers
 {
@@ -20,6 +21,10 @@ namespace pyp_pre_assignment.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadData(IFormFile file)
         {
+            if(!file.IsExcell()) return BadRequest("only excell");
+
+            if(file.ExcelSize(5000)) return BadRequest("only 5 mb");
+
             using(var stream  = new MemoryStream())
             {
                 await file.CopyToAsync(stream);
@@ -49,7 +54,6 @@ namespace pyp_pre_assignment.Controllers
                         commerce.COGS = double.Parse(worksheet.Cells[row, 11].Value.ToString().Trim());
                         commerce.Profit = double.Parse(worksheet.Cells[row, 12].Value.ToString().Trim());
                         commerce.Date = DateTime.Parse(worksheet.Cells[row, 13].Value.ToString().Trim());
-
 
                         await _context.Commerces.AddAsync(commerce);
                     }
