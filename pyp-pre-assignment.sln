@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pyp-pre-assignment", "pyp-pre-assignment\pyp-pre-assignment.csproj", "{C299E67C-5A22-44A4-A89D-8ED373E80177}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F91A2A53-4AA9-4AD9-916D-411217E0E396}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C299E67C-5A22-44A4-A89D-8ED373E80177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C299E67C-5A22-44A4-A89D-8ED373E80177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C299E67C-5A22-44A4-A89D-8ED373E80177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C299E67C-5A22-44A4-A89D-8ED373E80177}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {974C40B8-8B28-4CAD-8EEE-C8823114761B}
+	EndGlobalSection
+EndGlobal
