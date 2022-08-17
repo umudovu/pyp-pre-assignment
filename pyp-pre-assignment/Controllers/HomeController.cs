@@ -16,11 +16,28 @@ namespace pyp_pre_assignment.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
+        private readonly IWebHostEnvironment _env;
 
         public HomeController(AppDbContext context, IConfiguration config)
         {
             _context = context;
             _config = config;
+        }
+
+        [HttpPost("download")]
+        public IActionResult Download()
+        {
+            var path = @"C:\Users\umudo\Desktop\Asp.net\pyp-pre-assignment\pyp-pre-assignment\wwwroot\upload_template.xlsx";
+
+            MemoryStream ms = new MemoryStream();
+            var file = new FileStream(path, FileMode.Open, FileAccess.Read);
+                var bytes = new byte[file.Length];
+                file.Read(bytes, 0, (int)file.Length);
+                ms.Write(bytes, 0, (int)file.Length);
+                file.Close();
+
+            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "template.xlsx");
+
         }
 
         [HttpPost("upload")]
@@ -74,7 +91,6 @@ namespace pyp_pre_assignment.Controllers
         public IActionResult GetData([FromQuery] DataFilterDto dataFilter)
         {
             
-
             var IsEmail = dataFilter.AcceptorEmail.Split("@")[1] == "code.edu.az";
 
             if(!IsEmail) return BadRequest("Email only code.edu.az");
@@ -163,6 +179,8 @@ namespace pyp_pre_assignment.Controllers
             worksheet.Cell(3, 2).DataType = XLDataType.DateTime;
 
             worksheet.Cell(3, 3).Value = "-";
+            worksheet.Cell(3, 3).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
             worksheet.Cell(3, 4).Value = dataFilter.EndDate.ToString("g");
             worksheet.Cell(3, 4).DataType = XLDataType.DateTime;
 
@@ -170,7 +188,6 @@ namespace pyp_pre_assignment.Controllers
 
             worksheet.Row(currentRow).Height = 25.0;
             worksheet.Row(currentRow).Style.Font.Bold = true;
-            worksheet.Row(currentRow).Style.Fill.BackgroundColor = XLColor.LightGray;
             worksheet.Row(currentRow).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
 
             worksheet.Cell(currentRow, 1).Value = "FilterName";
